@@ -4,9 +4,9 @@
 A 股票最近 5 日收盘价查询 - 使用示例
 """
 
-import sys
 import json
 import os
+import sys
 
 # 添加父目录到 Python 路径
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
