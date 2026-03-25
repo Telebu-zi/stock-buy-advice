@@ -1,6 +1,39 @@
-# A 股票最近 5 日收盘价查询 Skill
+# A 股票投资顾问系统 (Skill + Agent 完整示例)
 
-这是一个 CatPaw AI 助手的 Skill，用于查询指定 A 股股票的最近 5 日收盘价数据。
+这是一个完整的 CatPaw AI 助手示例项目，演示了 **Skill（技能）** 与 **Agent（智能体）** 的本质区别。项目包含：
+- **单一Skills**：专注特定功能（价格查询、趋势分析等）
+- **智能Agent**：协调多个Skills，提供端到端的股票投资咨询服务
+
+## 🎯 项目目标
+1. 理解Skill与Agent的核心区别
+2. 通过可执行示例体验两者差异
+3. 学习如何部署到CatPaw Agent广场
+4. 掌握完整的开发、测试、部署流程
+
+## 📚 Agent vs Skill 本质区别
+
+### Skill（技能） - 单一功能模块
+- **定义**：专注完成特定任务
+- **特点**：输入明确、输出结构化、可独立使用
+- **示例**：查询价格、分析趋势、生成建议
+- **位置**：`fetch_stock_price.py`, `skills/` 目录
+
+### Agent（智能体） - 智能协调系统
+- **定义**：协调多个Skills的智能系统
+- **特点**：上下文理解、自主决策、端到端处理
+- **示例**：股票投资顾问Agent
+- **位置**：`agent/stock_investment_agent.py`
+
+### 对比总结
+| 维度 | Skill | Agent |
+|------|-------|-------|
+| 功能范围 | 单一专注 | 综合协调 |
+| 上下文管理 | 无或简单 | 复杂对话状态 |
+| 决策能力 | 无自主决策 | 基于规则的智能决策 |
+| 使用场景 | 功能组件 | 端到端解决方案 |
+
+## 📖 详细文档
+完整的学习指南和示例演示请查看：[AGENT_SKILL_DEMO.md](AGENT_SKILL_DEMO.md)
 
 ## 功能特性
 
@@ -27,13 +60,33 @@ pip install -r requirements.txt
 
 ### 使用
 
-#### 方式 1：命令行运行
+#### 方式 1：运行原始Skill（理解基础）
 
 ```bash
+# 运行原始价格查询Skill
 python fetch_stock_price.py
+
+# 运行趋势分析Skill示例
+python skills/trend_analyzer.py
+
+# 运行投资建议Skill示例
+python skills/investment_advisor.py
+
+# 运行对话管理Skill示例
+python skills/dialog_manager.py
 ```
 
-#### 方式 2：作为 Python 模块导入
+### 方式 2：运行智能Agent（体验协调）
+
+```bash
+# 运行股票投资顾问Agent完整演示
+python agent/stock_investment_agent.py
+
+# 启动API服务（可选）
+python app.py --port 8080
+```
+
+### 方式 3：作为 Python 模块导入
 
 ```python
 from fetch_stock_price import StockPriceQuery
@@ -153,12 +206,26 @@ print(json.dumps(result, indent=2, ensure_ascii=False))
 
 ```
 a-stock-price-query/
-├── SKILL.md                    # Skill 定义文档
+├── agent/                      # Agent实现目录
+│   ├── __init__.py
+│   └── stock_investment_agent.py    # 核心Agent
+├── skills/                     # 多个Skills目录
+│   ├── __init__.py
+│   ├── trend_analyzer.py       # 趋势分析Skill
+│   ├── investment_advisor.py   # 投资建议Skill
+│   └── dialog_manager.py       # 对话管理Skill
+├── .catpaw/                    # 部署配置
+│   └── catpaw-deploy.yaml      # Agent广场部署配置
+├── app.py                      # API服务入口
+├── Dockerfile                  # 容器化配置
+├── AGENT_SKILL_DEMO.md         # 详细学习指南
+├── SKILL.md                    # 原始Skill定义文档
 ├── README.md                   # 本文件
-├── fetch_stock_price.py        # 主程序脚本
+├── fetch_stock_price.py        # 原始价格查询Skill
 ├── requirements.txt            # 依赖列表
+├── INSTALLATION.md             # 安装指南
 └── examples/                   # 使用示例目录
-    └── example_usage.py        # 使用示例
+    └── example_usage.py        # 原始Skill示例
 ```
 
 ## 扩展功能
@@ -215,7 +282,13 @@ MIT License
 
 ## 版本历史
 
-- **v1.0** (2026-03-09) - 初版发布
+- **v2.0** (2026-03-09) - Agent扩展版
+  - ✅ 新增智能Agent协调多个Skills
+  - ✅ 添加趋势分析、投资建议、对话管理Skills
+  - ✅ 完整的API服务和部署配置
+  - ✅ 详细的学习指南文档
+
+- **v1.0** (2026-03-09) - 初版发布（原始Skill）
   - ✅ 支持按代码查询
   - ✅ 支持按名称查询
   - ✅ 自动计算涨跌幅
